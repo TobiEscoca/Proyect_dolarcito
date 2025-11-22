@@ -1,57 +1,99 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 const ConversorCompra = () => {
-  const [coin1, setCoin1] = useState(0);
-  const [coin2, setCoin2] = useState(0);
-  const [data, setData] = useState(null);
+  const [ars, setArs] = useState("");
+  const [usd, setUsd] = useState("");
+  const [data, setData] = useState([]);
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
   useEffect(() => {
     fetch("https://dolarapi.com/v1/dolares")
-      .then((response) => response.json())
-      .then((data) => setData(data));
+      .then((res) => res.json())
+      .then((d) => {
+        setData(d);
+        setSelectedIndex(0);
+      });
   }, []);
 
-  const handleChangeCoin1 = (e) => {
-    const value = e.target.value;
-    setCoin1(value);
-    setCoin2(value * 2);
+  const getRate = () => data?.[selectedIndex]?.compra || 0;
+
+  const handleArsChange = (e) => {
+    const val = e.target.value;
+    if (val === "") {
+      setArs("");
+      setUsd("");
+      return;
+    }
+    const num = parseFloat(val);
+    if (isNaN(num)) return;
+    setArs(val);
+    const rate = getRate();
+    if (!rate) return;
+    setUsd((num / rate).toFixed(6));
   };
 
-  const handleChangeCoin2 = (e) => {
-    const value = e.target.value;
-    setCoin2(value);
-    setCoin1(value * 0.5);
+  const handleUsdChange = (e) => {
+    const val = e.target.value;
+    if (val === "") {
+      setUsd("");
+      setArs("");
+      return;
+    }
+    const num = parseFloat(val);
+    if (isNaN(num)) return;
+    setUsd(val);
+    const rate = getRate();
+    if (!rate) return;
+    setArs((num * rate).toFixed(2));
+  };
+
+  const handleRateChange = (e) => {
+    const idx = parseInt(e.target.value, 10) || 0;
+    setSelectedIndex(idx);
+    const rate = data?.[idx]?.compra || 0;
+
+    if (ars !== "" && usd === "") {
+      const num = parseFloat(ars);
+      setUsd((num / rate).toFixed(6));
+    } else if (usd !== "") {
+      const num = parseFloat(usd);
+      setArs((num * rate).toFixed(2));
+    }
   };
 
   return (
-    <div className="rounded justify-items-center bg-amber-50 text-black">
-      <h2 className="text-2xl font-bold">Compra</h2>
+    <div className="rounded justify-items-center bg-amber-50 text-black p-4 w-full max-w-md">
+      <h2 className="text-xl md:text-2xl font-bold">Compra</h2>
 
       <div className="p-4">
-        <div className="flex items-center">
+        <div className="grid grid-cols-12 gap-2 items-center">
+          {/* ARS row */}
           <input
-            className="bg-amber-300 p-2 m-2 rounded-lg"
+            className="col-span-12 md:col-span-10 bg-amber-300 p-2 rounded-lg"
             type="number"
-            placeholder="Ingrese la cantidad"
-            value={coin1}
-            onChange={handleChangeCoin1}
+            placeholder="Ingrese ARS"
+            value={ars}
+            onChange={handleArsChange}
           />
-          <p>ARS</p>
-        </div>
+          <p className="col-span-12 md:col-span-2 text-center">ARS</p>
 
-        <div>
+          {/* USD row */}
           <input
-            className="bg-amber-300 p-2 m-2 rounded-lg"
+            className="col-span-12 md:col-span-10 bg-amber-300 p-2 rounded-lg"
             type="number"
-            placeholder="Ingrese la cantidad"
-            value={coin2}
-            onChange={handleChangeCoin2}
+            placeholder="Ingrese USD"
+            value={usd}
+            onChange={handleUsdChange}
           />
-          <select name="divise2" id="divise2">
-            {data?.map((dolares) => (
-              <option key={dolares.nombre} value={dolares.nombre}>
-                USD {dolares.nombre}
+
+          <select
+            value={selectedIndex}
+            onChange={handleRateChange}
+            className="col-span-12 md:col-span-2 p-1 rounded-lg whitespace-nowrap w-full md:w-auto"
+          >
+            {data?.map((d, i) => (
+              <option key={d.nombre} value={i}>
+                USD {d.nombre}
               </option>
             ))}
           </select>

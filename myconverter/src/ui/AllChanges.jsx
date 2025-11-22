@@ -11,13 +11,15 @@ const AllChanges = () => {
   }, []);
 
   return (
-    <div>
-      <h1 className="text-center text-5xl p-2 font-bold">Cambios hoy</h1>
-      <div className="gap-4 grid grid-cols-2 justify-items-center m-2">
+    <div className="max-w-6xl mx-auto px-4">
+      <h1 className="text-center text-3xl md:text-5xl p-2 font-bold">
+        Cambios hoy
+      </h1>
+      <div className="gap-4 grid grid-cols-1 md:grid-cols-2 justify-items-center m-2">
         {data?.map((dolares) => (
           <div
             key={dolares.nombre}
-            className="bg-white rounded-lg size-full shadow-md p-4 border"
+            className="bg-white rounded-lg w-full shadow-md p-4 border"
           >
             <h3 className="text-black font-semibold text-lg mb-2">
               {dolares.nombre}
