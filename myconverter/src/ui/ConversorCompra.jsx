@@ -62,24 +62,24 @@ const ConversorCompra = () => {
   };
 
   return (
-    <div className="rounded justify-items-center bg-amber-50 text-black p-4 w-full max-w-md">
+    <div className="rounded justify-items-center bg-amber-50 text-black p-6 w-full md:w-1/2 h-full flex flex-col">
       <h2 className="text-xl md:text-2xl font-bold">Compra</h2>
 
       <div className="p-4">
         <div className="grid grid-cols-12 gap-2 items-center">
           {/* ARS row */}
           <input
-            className="col-span-12 md:col-span-10 bg-amber-300 p-2 rounded-lg"
+            className="col-span-9 md:col-span-8 bg-amber-300 p-2 rounded-lg"
             type="number"
             placeholder="Ingrese ARS"
             value={ars}
             onChange={handleArsChange}
           />
-          <p className="col-span-12 md:col-span-2 text-center">ARS</p>
+          <p className="col-span-3 md:col-span-2 text-center">ARS</p>
 
           {/* USD row */}
           <input
-            className="col-span-12 md:col-span-10 bg-amber-300 p-2 rounded-lg"
+            className="col-span-9 md:col-span-8 bg-amber-300 p-2 rounded-lg"
             type="number"
             placeholder="Ingrese USD"
             value={usd}
@@ -89,7 +89,7 @@ const ConversorCompra = () => {
           <select
             value={selectedIndex}
             onChange={handleRateChange}
-            className="col-span-12 md:col-span-2 p-1 rounded-lg whitespace-nowrap w-full md:w-auto"
+            className="col-span-3 md:col-span-4 p-1 rounded-lg whitespace-nowrap w-full md:w-auto"
           >
             {data?.map((d, i) => (
               <option key={d.nombre} value={i}>
