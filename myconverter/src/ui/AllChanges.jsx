@@ -19,7 +19,7 @@ const AllChanges = () => {
         {data?.map((dolares) => (
           <div
             key={dolares.nombre}
-            className="bg-white rounded-lg w-full shadow-md p-4 border"
+            className="bg-white rounded-lg w-full shadow-md p-4 border transition-all duration-300 hover:scale-103"
           >
             <h3 className="text-black font-semibold text-lg mb-2">
               {dolares.nombre}

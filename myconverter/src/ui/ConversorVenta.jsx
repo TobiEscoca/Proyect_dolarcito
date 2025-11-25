@@ -101,9 +101,8 @@ const ConversorVenta = () => {
             value={ars}
             onChange={handleArsChange}
           />
-          <p className="col-span-3 md:col-span-2 text-center">ARS</p>
+          <p className="col-span-3 md:col-span-2 text-start pl-1.5">ARS</p>
 
-          {/* USD row */}
           <input
             className="col-span-9 md:col-span-8 bg-amber-300 p-2 rounded-lg w-full"
             type="number"
@@ -112,7 +111,6 @@ const ConversorVenta = () => {
             onChange={handleUsdChange}
           />
 
-          {/* Selector cotización */}
           <select
             value={selectedIndex}
             onChange={handleRateChange}

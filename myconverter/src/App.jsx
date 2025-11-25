@@ -10,14 +10,14 @@ function App() {
       <Navbar />
       <AllChanges />
       <div className="w-full px-4">
-        <h1 className="text-center text-3xl md:text-5xl p-2 font-bold">
+        <h1 className="text-center text-3xl md:text-5xl font-bold">
           Conversores
         </h1>
-        <div className="flex flex-col md:flex-row md:items-stretch gap-4 w-full">
+        <div className="flex flex-col p-4 md:flex-row md:items-stretch gap-4 w-full">
           <Conversor1 />
           <Conversor2 />
         </div>
-        <Footer/>
+        <Footer />
       </div>
     </>
   );

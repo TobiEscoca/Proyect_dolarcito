@@ -67,7 +67,6 @@ const ConversorCompra = () => {
 
       <div className="p-4">
         <div className="grid grid-cols-12 gap-2 items-center">
-          {/* ARS row */}
           <input
             className="col-span-9 md:col-span-8 bg-amber-300 p-2 rounded-lg"
             type="number"
@@ -75,11 +74,10 @@ const ConversorCompra = () => {
             value={ars}
             onChange={handleArsChange}
           />
-          <p className="col-span-3 md:col-span-2 text-center">ARS</p>
+          <p className="col-span-3 md:col-span-2 text-start pl-1.5">ARS</p>
 
-          {/* USD row */}
           <input
-            className="col-span-9 md:col-span-8 bg-amber-300 p-2 rounded-lg"
+            className="col-span-9 md:col-span-8 bg-amber-300 p-2 rounded-lg w-full"
             type="number"
             placeholder="Ingrese USD"
             value={usd}
